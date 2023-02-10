@@ -27,7 +27,7 @@ def get_new_key(key1, key2):
     return(key1[0]*key2[0]%26, (key1[1]+key2[1])%26)
     
     
-def encript(open_text, key1=(1, 0), key2=(1, 0)):
+def encrypt(open_text, key1=(1, 0), key2=(1, 0)):
     y = []
     open_text_int = str_to_int(open_text)
     alpha, beta = key1
@@ -45,7 +45,7 @@ def encript(open_text, key1=(1, 0), key2=(1, 0)):
     return int_to_str(y)
 
 
-def decript(close_text, key1=(1, 0), key2=(1, 0)):
+def decrypt(close_text, key1=(1, 0), key2=(1, 0)):
     y = []
     close_text_int = str_to_int(close_text)
     ialpha = invert_alpha(key1[0])
@@ -69,8 +69,8 @@ if __name__ == '__main__':
     text = input('Input text: ')
     key1 = (int(input('Input alpha1: ')), int(input('Input beta1: ')))
     key2 = (int(input('Input alpha2: ')), int(input('Input beta2: ')))
-    action = input('Input action(e-encript, d-decript): ')
+    action = input('Input action(e-encrypt, d-decrypt): ')
     if action == 'e':
-        print(encript(text, key1, key2))
+        print(encrypt(text, key1, key2))
     elif action == 'd':
-        print(decript(text, key1, key2))
+        print(decrypt(text, key1, key2))

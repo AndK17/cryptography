@@ -21,7 +21,7 @@ def int_to_str(s):
     return ''.join(res)
 
 
-def encript(open_text, key=(1, 0)):
+def encrypt(open_text, key=(1, 0)):
     open_text_int = str_to_int(open_text)
     alpha, beta = key
     y = []
@@ -32,7 +32,7 @@ def encript(open_text, key=(1, 0)):
     return int_to_str(y)
 
 
-def decript(close_text, key=(1, 0)):
+def decrypt(close_text, key=(1, 0)):
     close_text_int = str_to_int(close_text)
     ialpha = invert_alpha(key[0])
     beta = key[1]
@@ -47,8 +47,8 @@ def decript(close_text, key=(1, 0)):
 if __name__ == "__main__":
     text = input('Input text: ')
     key = (int(input('Input alpha: ')), int(input('Input beta: ')))
-    action = input('Input action(e-encript, d-decript): ')
+    action = input('Input action(e-encrypt, d-decrypt): ')
     if action == 'e':
-        print(encript(text, key))
+        print(encrypt(text, key))
     elif action == 'd':
-        print(decript(text, key))
+        print(decrypt(text, key))

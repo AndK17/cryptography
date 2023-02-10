@@ -1,7 +1,7 @@
 zm = 'abcdefghijklmnopqrstuvwxyz'
 
 
-def encript(open_text, key='zyxwvutsrqponmlkjihgfedcba'):
+def encrypt(open_text, key='zyxwvutsrqponmlkjihgfedcba'):
     res = []
     for i in open_text:
         res.append(key[zm.find(i)])
@@ -9,7 +9,7 @@ def encript(open_text, key='zyxwvutsrqponmlkjihgfedcba'):
     return ''.join(res)
 
 
-def decript(close_text, key='zyxwvutsrqponmlkjihgfedcba'):
+def decrypt(close_text, key='zyxwvutsrqponmlkjihgfedcba'):
     res = []
     for i in close_text:
         res.append(zm[key.find(i)])
@@ -25,14 +25,14 @@ if __name__ == "__main__":
             break
         else:
             print(f'Key eln must be {len(zm)}')
-    action = input('Input action(e-encript, d-decript): ')
+    action = input('Input action(e-encrypt, d-decrypt): ')
     if action == 'e':
-        print(encript(text, key))
+        print(encrypt(text, key))
     elif action == 'd':
-        print(decript(text, key))
+        print(decrypt(text, key))
     
     # text = 'abde'
     # key = 'zyxwvutsrqponmlkjihgfedcba'
-    # text = encript(text, key)
+    # text = encrypt(text, key)
     # print(text)
-    # print(decript(text, key))
+    # print(decrypt(text, key))
