@@ -18,7 +18,7 @@ def encript(open_text, key1=(1, 0), key2=(1, 0)):
     
     return int_to_str(y)
 
-s = 'cryptography'
+s = 'hiykiapgiokk'
 for i in range(1, 30):
     s = encript(s, (3, 1), (5, 1))
     print(i, s)
