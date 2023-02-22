@@ -26,8 +26,8 @@ def int_to_str(s):
     return ''.join(res)
 
 
-def get_key():
-    with open('matrix.txt', 'r') as f:
+def get_key(file='key.txt'):
+    with open(file, 'r') as f:
         q = []
         for line in f.readlines():
             q.append([int(i) for i in line.split()])
@@ -36,12 +36,13 @@ def get_key():
 
 
 def encrypt(open_text, key, block_size):
-    
+    res = []
     open_text_int = str_to_int(open_text)
     for i in range(0, len(open_text), block_size):
-        print(open_text_int[i:i+block_size])
+        block = np.array(open_text_int[i:i+block_size])
+        res += [i%26 for i in list(key.dot(block))]
     
-    return 0
+    return res
 
 
 def decrypt(close_text, key):
@@ -54,15 +55,9 @@ if __name__ == '__main__':
     block_size = len(key)
     text = input('Input text: ')
     text = text + 'z'*(block_size * math.ceil(len(text)/block_size) - len(text))
-    encrypt(text, key, block_size)
+    print(encrypt(text, key, block_size))
     # action = input('Input action(e-encrypt, d-decrypt): ')
     # if action == 'e':
     #     print(encrypt(text, key1, key2))
     # elif action == 'd':
     #     print(decrypt(text, key1, key2))
-        
-    inv = np.linalg.inv(get_key())
-    print(get_key())
-    print(inv)
-    print(inv.dot(get_key()))
-    # print(np.mul)
