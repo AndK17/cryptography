@@ -30,16 +30,14 @@ def invert_matrix(matrix):
     m_size = len(matrix)
     det = round(np.linalg.det(matrix))%26
     inv_det = invert_alpha(det)
-    print(inv_det)
-    a_matrix = matrix.T.copy()
-    print(matrix)
+    inv_matrix = matrix.copy()
+    
     for i in range(m_size):
         for j in range(m_size):
             q = np.delete(matrix, (i), axis=0)
-            q = np.delete(q, (j), axis=1)   
-            print(q, np.linalg.det(q)%26, round(np.linalg.det(q))*inv_det%26)
-            a_matrix[j][i] = round(np.linalg.det(q))*inv_det%26
-    print(a_matrix)
+            q = np.delete(q, (j), axis=1)
+            inv_matrix[j][i] = round(((-1)**(i+j))*np.linalg.det(q))*inv_det%26
+    return inv_matrix
     
     
 def get_key(file='key.txt'):
@@ -73,19 +71,16 @@ def decrypt(close_text, key, block_size):
 
 
 if __name__ == '__main__':
-    key = get_key(r'C:\prog\study\cryptography\hill\key.txt')
-    # block_size = len(key)
-    # text = input('Input text: ')
-    # text = text + 'z'*(block_size * math.ceil(len(text)/block_size) - len(text))
-    # res = encrypt(text, key, block_size)
-    # print(res)
-    # print(int_to_str(res))
+    key = get_key(r'D:\programming\hse\crypt\hill\key.txt')
+    block_size = len(key)
+    text = input('Input text: ')
     
-    invert_matrix(key)
-    
-    
-    # action = input('Input action(e-encrypt, d-decrypt): ')
-    # if action == 'e':
-    #     print(encrypt(text, key1, key2))
-    # elif action == 'd':
-    #     print(decrypt(text, key1, key2))
+
+    action = input('Input action(e-encrypt, d-decrypt): ')
+    if action == 'e':
+        text = text + 'z'*(block_size * math.ceil(len(text)/block_size) - len(text))
+        res = encrypt(text, key, block_size)
+        print(int_to_str(res))
+    elif action == 'd':
+        res = decrypt(text, key, block_size)
+        print(int_to_str(res))
