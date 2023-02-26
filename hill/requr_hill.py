@@ -49,38 +49,45 @@ def get_key(file='key.txt'):
         return np.array(q) 
 
 
-def encrypt(open_text, key, block_size):
+def encrypt(open_text, key1, key2, block_size):
     res = []
     open_text_int = str_to_int(open_text)
     for i in range(0, len(open_text), block_size):
         block = np.array(open_text_int[i:i+block_size])
-        res += [i%26 for i in list(key.dot(block))]
+        res += [i%26 for i in list(key1.dot(block))]
+        
+        new_key = key1.dot(key2)
+        key1, key2 = key2, new_key
     
     return res
 
 
-def decrypt(close_text, key, block_size):
+def decrypt(close_text, key1, key2, block_size):
     res = []
     close_text_int = str_to_int(close_text)
-    inv_key = invert_matrix(key)
     for i in range(0, len(close_text_int), block_size):
+        inv_key = invert_matrix(key1)
         block = np.array(close_text_int[i:i+block_size])
         res += [i%26 for i in list(inv_key.dot(block))]
-    
+        
+        new_key = key1.dot(key2)
+        key1, key2 = key2, new_key
+        
     return res
 
 
 if __name__ == '__main__':
-    key = get_key(r'key.txt')
-    block_size = len(key)
+    key1 = get_key(r'D:\programming\hse\crypt\hill\key1.txt')
+    key2 = get_key(r'D:\programming\hse\crypt\hill\key2.txt')
+    block_size = len(key1)
     text = input('Input text: ')
     
 
     action = input('Input action(e-encrypt, d-decrypt): ')
     if action == 'e':
         text = text + 'z'*(block_size * math.ceil(len(text)/block_size) - len(text))
-        res = encrypt(text, key, block_size)
+        res = encrypt(text, key1, key2, block_size)
         print(int_to_str(res))
     elif action == 'd':
-        res = decrypt(text, key, block_size)
+        res = decrypt(text, key1, key2, block_size)
         print(int_to_str(res))
