@@ -33,6 +33,7 @@ def invert_matrix(matrix):
     m_size = len(matrix)
     det = round(np.linalg.det(matrix))%26
     if math.gcd(det, 26) != 1:
+        print(det)
         return 'Bad matrix'
     
     inv_det = invert_alpha(det)
@@ -70,8 +71,9 @@ def get_m(pairs):
     return matr
     
 import itertools
-pairs = [([7, 4, 11], [15, 15, 3]), ([8, 0, 12], [20, 4, 6]), ([2, 0, 13], [3, 2, 2])]
-for i in itertools.permutations(pairs, len(pairs)):
+pairs = [([7, 4, 11], [15, 15, 3]), ([8, 0, 12], [20, 4, 6]), ([2, 0, 13], [3, 2, 2]), ([24, 4, 18], [4, 8, 8]), ([13, 8, 2], [0, 1, 17]),
+         ([12, 24, 13], [1, 4, 24]), ([18, 4, 17], [3, 24, 0]), ([1, 0, 18], [20, 21, 11]), ([1, 3, 5], [13, 20, 11])]
+for i in itertools.combinations(pairs, len(pairs[0][0])):
     o_text = []
     c_text = []
     for j in i:
@@ -82,7 +84,8 @@ for i in itertools.permutations(pairs, len(pairs)):
     print(invert_matrix(np.array(o_text).T))
     print()
 if __name__ == '__main__':
-    print(get_m(pairs))
+    pass
+    # print(get_m(pairs))
     
     # key = get_key(r'ot.txt')
     # print(key)

@@ -52,6 +52,7 @@ def get_key(file='key.txt'):
 def encrypt(open_text, key1, key2, block_size):
     res = []
     open_text_int = str_to_int(open_text)
+    print(open_text_int)
     for i in range(0, len(open_text), block_size):
         block = np.array(open_text_int[i:i+block_size])
         res += [i%26 for i in list(key1.dot(block))]
@@ -78,8 +79,8 @@ def decrypt(close_text, key1, key2, block_size):
 
 
 if __name__ == '__main__':
-    key1 = get_key(r'D:\programming\hse\crypt\hill\key1.txt')
-    key2 = get_key(r'D:\programming\hse\crypt\hill\key2.txt')
+    key1 = get_key(r'key1.txt')
+    key2 = get_key(r'key2.txt')
     block_size = len(key1)
     text = input('Input text: ')
     
