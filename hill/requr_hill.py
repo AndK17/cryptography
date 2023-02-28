@@ -58,6 +58,7 @@ def encrypt(open_text, key1, key2, block_size):
         
         new_key = key1.dot(key2)
         key1, key2 = key2, new_key
+    print(res)   
     
     return res
 
@@ -72,7 +73,7 @@ def decrypt(close_text, key1, key2, block_size):
         
         new_key = key1.dot(key2)
         key1, key2 = key2, new_key
-        
+    print(res)   
     return res
 
 

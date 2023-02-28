@@ -55,7 +55,7 @@ def encrypt(open_text, key, block_size):
     for i in range(0, len(open_text), block_size):
         block = np.array(open_text_int[i:i+block_size])
         res += [i%26 for i in list(key.dot(block))]
-    
+    print(res)
     return res
 
 
@@ -63,9 +63,11 @@ def decrypt(close_text, key, block_size):
     res = []
     close_text_int = str_to_int(close_text)
     inv_key = invert_matrix(key)
+    print(inv_key)
     for i in range(0, len(close_text_int), block_size):
         block = np.array(close_text_int[i:i+block_size])
         res += [i%26 for i in list(inv_key.dot(block))]
+    print(res)
     
     return res
 
