@@ -29,6 +29,9 @@ def invert_alpha(a):
 def invert_matrix(matrix):
     m_size = len(matrix)
     det = round(np.linalg.det(matrix))%26
+    if math.gcd(det, 26) != 1:
+        return 'Bad matrix'
+    
     inv_det = invert_alpha(det)
     inv_matrix = matrix.copy()
     
