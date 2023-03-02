@@ -91,4 +91,5 @@ if __name__ == '__main__':
             print('NICE')
             print(m)
             print(np.array(c_text).T.dot(m)%26)
+            break
         print()
